@@ -81,7 +81,6 @@ public class ClientHandler extends Thread {
             }
             this.dis.close();
             this.dos.close();
-            toLog.close();
         } catch (SocketException ignored) {
         } catch (IOException e) {
             e.printStackTrace();
@@ -241,6 +240,10 @@ public class ClientHandler extends Thread {
                 ch.dos.write(bmessage);
             }
             return "/logout";
+        } else if (Objects.equals(splitinput[0], "/log")){
+            LogHandler log = new LogHandler();
+            input = log.sendLog();
+            return input;
         } else if (Objects.equals(splitinput[0], "/?")) {
             input = ("""
                     possible server commands are:
